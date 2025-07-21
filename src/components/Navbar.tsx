@@ -80,7 +80,7 @@ const Navbar = (props: SearchProp) => {
                   <Avatar 
                     round 
                     size="32" 
-                    name={auth.currentUser.email} 
+                    name={auth.currentUser.email ?? undefined} 
                     className="border-2 border-gray-200 hover:border-blue-500 transition-colors"
                   />
                 ) : (

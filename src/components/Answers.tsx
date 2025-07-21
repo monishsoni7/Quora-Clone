@@ -1,30 +1,31 @@
 import Avatar from "react-avatar"
-import { auth, db } from "../firebase/setup"
+// Removed unused import 'auth'
+import { db } from "../firebase/setup"
 import account from "../assets/account.png"
 import { collection, doc, getDocs } from "firebase/firestore"
 import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-// Icon components (same as in your mock)
-const UpvoteIcon = ({ className }) => (
+// Icon components with typed props
+const UpvoteIcon = ({ className }: { className: string }) => (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="m5 15 7-7 7 7"/>
     </svg>
 );
 
-const DownvoteIcon = ({ className }) => (
+const DownvoteIcon = ({ className }: { className: string }) => (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="m5 9 7 7 7-7"/>
     </svg>
 );
 
-const CommentIcon = ({ className }) => (
+const CommentIcon = ({ className }: { className: string }) => (
      <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
 );
 
-const ShareIcon = ({ className }) => (
+const ShareIcon = ({ className }: { className: string }) => (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="18" cy="5" r="3"></circle>
         <circle cx="6" cy="12" r="3"></circle>
@@ -62,10 +63,11 @@ const Answers = () => {
         getAnswer()
     }, [])
 
-    const formatUsername = (email) => {
+    // Added type annotations for email and callback parameter l
+    const formatUsername = (email: string | undefined) => {
         if (!email) return "Anonymous"
         const name = email.substring(0, email.indexOf("@"))
-        return name.replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+        return name.replace(/[._]/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())
     }
 
     return (
